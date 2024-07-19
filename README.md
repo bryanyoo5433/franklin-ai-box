@@ -39,11 +39,13 @@ Creating a virtual environment helps in managing dependencies and avoiding confl
 
 ### Step 2: Activate the Virtual Environment
 Activate the virtual environment using the following command:
+
     ```bash
     conda activate myenv
 
 ### Step 3: Install the Required Libraries
 Install the necessary libraries using the requirements.txt file.
+
     ```bash
     pip install -r requirements.txt
     
@@ -55,6 +57,7 @@ Follow the installation instructions on the [Qualcomm AI Hub GitHub page](https:
     
 ### Step 5: Set Up Jupyter Lab
 Install Jupyter Lab if it's not already installed.
+
     ```bash
     pip install jupyterlab
 
