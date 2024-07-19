@@ -1,6 +1,6 @@
-# AI Box User Manual
+# Franklin AI Box User Manual
 
-Welcome to the AI Box User Manual. This guide will help you set up and run the AI Box using the YOLOv8 model on a Qualcomm NPU.
+Welcome to the Franklin AI Box User Manual. This guide will help you set up and run the AI Box using the YOLOv8 model on a Qualcomm NPU.
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -28,4 +28,4 @@ The AI Box is designed to provide real-time object detection using the YOLOv8 mo
 1. **Install Python**: Ensure you have Python 3.8 or higher installed on your system.
 2. **Install Required Libraries**: Use pip to install the necessary libraries.
    ```bash
-   pip install numpy pillow torch opencv-python matplotlib typing
+pip install numpy pillow torch opencv-python matplotlib typing
