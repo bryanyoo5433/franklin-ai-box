@@ -27,21 +27,34 @@ To install the required libraries, you can use the provided `requirements.txt` f
 - Qualcomm AI Hub library (`qai_hub`)
 
 ## Installation
-1. **Install Python**: Ensure you have Python 3.8 or higher installed on your system.
-2. **Install Required Libraries**: Use pip to install the necessary libraries.
-   ```bash
-    pip install numpy pillow torch opencv-python matplotlib typing
-   ```
-asdfasdfadf
-
-## Installation
 
 ### Step 1: Create a Virtual Environment
 Creating a virtual environment helps in managing dependencies and avoiding conflicts with other projects.
 
 1. Open a terminal or command prompt.
-2. Navigate to your project directory.
-3. Run the following command to create a virtual environment:
+2. Run the following command to create a virtual environment using `conda`:
 
    ```bash
-   python -m venv myenv
+   conda create --name myenv python=3.9.7
+
+### Step 2: Activate the Virtual Environment
+Activate the virtual environment using the following command:
+    ```bash
+    conda activate myenv
+
+### Step 3: Install the Required Libraries
+Install the necessary libraries using the requirements.txt file.
+    ```bash
+    pip install -r requirements.txt
+    
+### Step 4: Install Qualcomm AI Hub Library
+Follow the installation instructions on the [Qualcomm AI Hub GitHub page](https://github.com/quic/ai-hub-models).
+
+    ```bash
+    pip install qai_hub
+    
+### Step 5: Set Up Jupyter Lab
+Install Jupyter Lab if it's not already installed.
+    ```bash
+    pip install jupyterlab
+
