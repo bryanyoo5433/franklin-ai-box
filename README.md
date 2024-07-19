@@ -118,6 +118,7 @@ Start Jupyter Lab from your terminal or command prompt.
 1. Preprocess the image.
 2. Run the inference job.
 3. Postprocess the results.
+   
    ```python
    from PIL import Image
    import numpy as np
