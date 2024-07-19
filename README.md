@@ -61,3 +61,12 @@ Install Jupyter Lab if it's not already installed.
     ```bash
     pip install jupyterlab
 
+### Step 6: Run Jupyter Lab
+Start Jupyter Lab from your terminal or command prompt.
+
+    ```bash
+    jupyter lab
+    
+### Step 7: Ensure Images and Models are in the Same Directory
+Make sure your images and models are in the same directory as your Jupyter notebook for easy access.
+Download the YOLOv8-Detection-Quantized Model from this [link](https://aihub.qualcomm.com/iot/models/yolov8_det_quantized?domain=Computer+Vision&useCase=Object+Detection&chipsets=QCS6490).
