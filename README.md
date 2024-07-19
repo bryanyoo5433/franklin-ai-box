@@ -19,6 +19,8 @@ Welcome to the Franklin AI Box User Manual. This guide will help you set up and 
 The AI Box is designed to provide real-time object detection using the YOLOv8 model running on the Qualcomm QCS6490 chipset. This manual will guide you through the steps required to run inference and process the results.
 
 ## Requirements
+To install the required libraries, you can use the provided `requirements.txt` file. First, ensure you have Python >=3.8 and <=3.10 installed on your system. We recommend using a Python virtual environment (miniconda or virtualenv).
+
 - Qualcomm QCS6490 chipset
 - Python 3.8 or higher
 - Required libraries: numpy, PIL (Pillow), torch, OpenCV, matplotlib, typing
@@ -31,3 +33,15 @@ The AI Box is designed to provide real-time object detection using the YOLOv8 mo
     pip install numpy pillow torch opencv-python matplotlib typing
    ```
 asdfasdfadf
+
+## Installation
+
+### Step 1: Create a Virtual Environment
+Creating a virtual environment helps in managing dependencies and avoiding conflicts with other projects.
+
+1. Open a terminal or command prompt.
+2. Navigate to your project directory.
+3. Run the following command to create a virtual environment:
+
+   ```bash
+   python -m venv myenv
