@@ -6,14 +6,8 @@ Welcome to the Franklin AI Box User Manual. This guide will help you set up and 
 1. [Introduction](#introduction)
 2. [Requirements](#requirements)
 3. [Installation](#installation)
-4. [Usage](#usage)
-    - [Profiling the Model](#profiling-the-model)
-    - [Loading and Preprocessing the Image](#loading-and-preprocessing-the-image)
-    - [Running the Inference Job](#running-the-inference-job)
-    - [Processing the Results](#processing-the-results)
-    - [Drawing Bounding Boxes](#drawing-bounding-boxes)
-5. [Example Code](#example-code)
-6. [Conclusion](#conclusion)
+4. [Example Code](#example-code)
+5. [Conclusion](#conclusion)
 
 ## Introduction
 The AI Box is designed to provide real-time object detection using the YOLOv8 model running on the Qualcomm QCS6490 chipset. This manual will guide you through the steps required to run inference and process the results.
@@ -66,7 +60,56 @@ Start Jupyter Lab from your terminal or command prompt.
 
     ```bash
     jupyter lab
+
+### Step 7: Organize Your Files
+1. Download the Model: Download the YOLOv8-Detection-Quantized Model from this [link](https://aihub.qualcomm.com/iot/models/yolov8_det_quantized?domain=Computer+Vision&useCase=Object+Detection&chipsets=QCS6490).
+2. Create a Folder: In Jupyter Lab, create a new folder and place the downloaded model, your Jupyter notebook, and the images you want to use all in this folder.
+
+## Example Code
+
+### Profiling the Model
+1. Load and preprocess the image.
+2. Submit a profiling job to understand the performance characteristics of the model on the specified device.
+
+   ```python
+   import numpy as np
+    from PIL import Image
+    import matplotlib.pyplot as plt
+    import qai_hub as hub  # Hypothetical module for Qualcomm AI Hub interactions
     
-### Step 7: Ensure Images and Models are in the Same Directory
-Make sure your images and models are in the same directory as your Jupyter notebook for easy access.
-Download the YOLOv8-Detection-Quantized Model from this [link](https://aihub.qualcomm.com/iot/models/yolov8_det_quantized?domain=Computer+Vision&useCase=Object+Detection&chipsets=QCS6490).
+    # Define the path to the input image
+    image_path = "street_scene.jpg"
+    
+    # Open the image and convert it to RGB format
+    original_image = Image.open(image_path).convert('RGB')
+    
+    # Resize the image to the required dimensions (640x640)
+    new_size = (640, 640)
+    image = original_image.resize(new_size)
+    
+    # Display the resized image
+    plt.imshow(image)
+    plt.axis('off')
+    plt.show()
+    
+    # Convert the image to a numpy array and normalize pixel values to [0, 1]
+    img_array = np.array(image, dtype=np.float32) / 255.0
+    
+    # Add a batch dimension to the image array to match model input requirements
+    input_array = np.expand_dims(img_array, axis=0)
+    
+    # Define the device and model path for YOLOv8
+    device = hub.Device("QCS6490 (Proxy)")
+    model = "yolov8_det_quantized.tflite"
+    
+    # Submit a profiling job to Qualcomm AI Hub, specifying the model and device
+    profile_job = hub.submit_profile_job(
+        model=model,
+        device=device,
+        options="--compute_unit npu"
+    )
+    
+    # The profiling job will help to understand the performance characteristics of the model on the specified device
+    
+    # Note: Ensure to include appropriate error handling and additional functionality as needed
+```
