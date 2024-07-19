@@ -28,4 +28,6 @@ The AI Box is designed to provide real-time object detection using the YOLOv8 mo
 1. **Install Python**: Ensure you have Python 3.8 or higher installed on your system.
 2. **Install Required Libraries**: Use pip to install the necessary libraries.
    ```bash
-pip install numpy pillow torch opencv-python matplotlib typing
+    pip install numpy pillow torch opencv-python matplotlib typing
+   ```
+asdfasdfadf
