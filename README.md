@@ -126,6 +126,7 @@ Start Jupyter Lab from your terminal or command prompt.
    import cv2
    import matplotlib.pyplot as plt
    from typing import Tuple, List
+   from qai_hub_models.utils.bounding_box_processing import batched_nms
    
    coco_class_names = [
        'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck',
