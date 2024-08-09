@@ -1,6 +1,11 @@
 # Franklin AI Box User Manual
 
-Welcome to the Franklin AI Box User Manual. This guide will help you set up and run the AI Box using the YOLOv8 model on a Qualcomm NPU.
+Welcome to the Franklin AI Box User Manual. This guide will help you set up and run on-device on the Franklin AI Box using. This repository contains code for
+
+1. Object Detection - YOLOv8 Quantized
+2. Image Segmentation - FFNet 40s Quantized
+
+
 
 ## Table of Contents
 1. [Introduction](#introduction)
