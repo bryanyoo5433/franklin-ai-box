@@ -65,7 +65,8 @@ Start Jupyter Lab from your terminal or command prompt.
 1. Download the Model: Download the YOLOv8-Detection-Quantized Model from this [link](https://aihub.qualcomm.com/iot/models/yolov8_det_quantized?domain=Computer+Vision&useCase=Object+Detection&chipsets=QCS6490).
 2. Create a Folder: In Jupyter Lab, create a new folder and place the downloaded model, your Jupyter notebook, and the images you want to use all in this folder.
 
-## Example Code
+## Example Code (Object Detection)
+# If want to do Image Segmentation, go to segmentation.py in the repo.
 
 ### Profiling the Model
 1. Load and preprocess the image.
