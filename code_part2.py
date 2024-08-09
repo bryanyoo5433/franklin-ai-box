@@ -1,11 +1,13 @@
-from PIL import Image
 import numpy as np
+from PIL import Image
+import matplotlib.pyplot as plt
+import qai_hub as hub  # Hypothetical module for Qualcomm AI Hub interactions
 import torch
 import cv2
-import matplotlib.pyplot as plt
 from typing import Tuple, List
 from qai_hub_models.utils.bounding_box_processing import batched_nms
 
+# Define the COCO class names
 coco_class_names = [
     'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck',
     'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench',
@@ -21,14 +23,26 @@ coco_class_names = [
     'toothbrush'
 ]
 
-# Load and preprocess the image
-image_path = "testimage.jpg"
-image = Image.open(image_path).convert('RGB').resize((640, 640))
-image_np = np.array(image, dtype=np.float32)
-img_array = image_np / 255.0
-input_array = np.expand_dims(img_array, axis=0)
-print(input_array.shape)
+# Define the path to the input image
+image_path = "street_scene.jpg"
 
+# Open the image and convert it to RGB format
+original_image = Image.open(image_path).convert('RGB')
+original_width, original_height = original_image.size
+
+# Resize the image to the required dimensions (640x640)
+new_size = (640, 640)
+resized_image = original_image.resize(new_size)
+
+# Convert the resized image to a numpy array and normalize pixel values to [0, 1]
+resized_img_array = np.array(resized_image, dtype=np.float32) / 255.0
+
+# Add a batch dimension to the image array to match model input requirements
+input_array = np.expand_dims(resized_img_array, axis=0)
+
+# Define the device and model path for YOLOv8
+device = hub.Device("QCS6490 (Proxy)")
+model = "yolov8_det_quantized.tflite"
 
 # Submit an inference job using the compiled YOLOv8 model
 inference_job = hub.submit_inference_job(
@@ -37,23 +51,15 @@ inference_job = hub.submit_inference_job(
     inputs=dict(image=[input_array]),
 )
 on_device_output = inference_job.download_output_data()
-print("OUTPUT: ", on_device_output)
 
 # Extract the outputs
 output_names = list(on_device_output.keys())
 output_values = list(on_device_output.values())
-print("OUTPUT NAME:", output_names)
-print("OUTPUT VALS:", output_values)
 
 # Convert to tensor
 boxes = torch.tensor(output_values[0][0])
 scores = torch.tensor(output_values[1][0])
 class_idx = torch.tensor(output_values[2][0])
-
-# Process the results as needed
-print("Boxes:", boxes)
-print("Scores:", scores)
-print("Class Indices:", class_idx)
 
 # Apply Non-Maximum Suppression (NMS)
 nms_iou_threshold = 0.7
@@ -74,21 +80,34 @@ pred_class_idx = [cls_idx.cpu().numpy() for cls_idx in processed_class_idx]
 # Collect detected labels
 detected_labels = [coco_class_names[int(label)] for label in pred_class_idx[0]]
 
-# Draw the bounding boxes and labels on the image
+# Rescale the bounding boxes to the original image size
+scale_x = original_width / new_size[0]
+scale_y = original_height / new_size[1]
+
+rescaled_boxes = []
+for box in pred_boxes[0]:
+    x_min, y_min, x_max, y_max = box
+    x_min = int(x_min * scale_x)
+    y_min = int(y_min * scale_y)
+    x_max = int(x_max * scale_x)
+    y_max = int(y_max * scale_y)
+    rescaled_boxes.append([x_min, y_min, x_max, y_max])
+
+# Draw the bounding boxes and labels on the original image
 def draw_boxes(image, boxes, labels, color=(0, 0, 255), size=2):
     img_np = np.array(image)
-    for box, label in zip(boxes[0], labels[0]):
-        x_min, y_min, x_max, y_max = map(int, box)
+    for box, label in zip(boxes, labels):
+        x_min, y_min, x_max, y_max = box
         label_name = coco_class_names[int(label)]
         img_np = cv2.rectangle(img_np, (x_min, y_min), (x_max, y_max), color, size)
         img_np = cv2.putText(img_np, label_name, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, size)
     return img_np
 
-# Convert the image from RGB to BGR for OpenCV drawing
-image_bgr = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
+# Convert the original image from RGB to BGR for OpenCV drawing
+original_image_bgr = cv2.cvtColor(np.array(original_image), cv2.COLOR_RGB2BGR)
 
-# Draw the bounding boxes and labels on the image
-image_with_boxes = draw_boxes(image_bgr, pred_boxes, pred_class_idx)
+# Draw the bounding boxes and labels on the original image
+image_with_boxes = draw_boxes(original_image_bgr, rescaled_boxes, pred_class_idx[0])
 
 # Convert BGR to RGB for correct color display
 image_with_boxes_rgb = cv2.cvtColor(image_with_boxes, cv2.COLOR_BGR2RGB).astype(np.uint8)
@@ -101,5 +120,8 @@ image_with_boxes_pil.show()
 plt.imshow(image_with_boxes_rgb)
 plt.axis('off')
 plt.show()
+
+print("Detected objects:", ", ".join(detected_labels))
+
 
 print("Detected objects:", ", ".join(detected_labels))
