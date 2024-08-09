@@ -5,6 +5,9 @@ Welcome to the Franklin AI Box User Manual. This guide will help you set up and 
 1. Object Detection - YOLOv8 Quantized
 2. Image Segmentation - FFNet 40s Quantized
 
+<img width="376" alt="Original" src="https://github.com/user-attachments/assets/5f8c1393-3cde-4491-bb7b-333ef6879cda">
+<img width="523" alt="Segmentation" src="https://github.com/user-attachments/assets/eb2fefc3-b649-4947-a45d-f55a62f7f47c">
+<img width="520" alt="Both" src="https://github.com/user-attachments/assets/d20b215a-3557-4e34-b84f-c627cbab4b32">
 
 
 ## Table of Contents
