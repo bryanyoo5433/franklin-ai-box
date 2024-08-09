@@ -255,5 +255,5 @@ Start Jupyter Lab from your terminal or command prompt.
    ```
 
 ## Conclusion
-This manual provided a comprehensive guide to setting up and running the AI Box using the YOLOv8 model on a Qualcomm NPU. By following these steps, you should be able to profile the model, preprocess images, run inference, and postprocess the results effectively.
+This manual provided a comprehensive guide to setting up and running the YOLOv8 and FFNet model on the Qualcomm NPU of the AI Box. By following these steps, you should be able to profile the model, preprocess images, run inference, and postprocess the results effectively.
 
