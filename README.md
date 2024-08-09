@@ -1,6 +1,6 @@
 # Franklin AI Box User Manual
 
-Welcome to the Franklin AI Box User Manual. This guide will help you set up and run on-device on the Franklin AI Box using. This repository contains code for
+Welcome to the Franklin AI Box User Manual. This guide will help you set up and run on-device on the Franklin AI Box. This repository contains code for
 
 1. Object Detection - YOLOv8 Quantized
 2. Image Segmentation - FFNet 40s Quantized
@@ -71,7 +71,8 @@ Start Jupyter Lab from your terminal or command prompt.
 2. Create a Folder: In Jupyter Lab, create a new folder and place the downloaded model, your Jupyter notebook, and the images you want to use all in this folder.
 
 ## Example Code (Object Detection)
-### If want to do Image Segmentation, go to segmentation.py in the repo.
+1.  If want to do Image Segmentation, go to segmentation.py in the repo.
+2.  If want to do Object Detection with Image Segmentation, go to combined.py in the repo.
 
 ### Profiling the Model
 1. Load and preprocess the image.
