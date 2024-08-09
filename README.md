@@ -66,7 +66,7 @@ Start Jupyter Lab from your terminal or command prompt.
 2. Create a Folder: In Jupyter Lab, create a new folder and place the downloaded model, your Jupyter notebook, and the images you want to use all in this folder.
 
 ## Example Code (Object Detection)
-# If want to do Image Segmentation, go to segmentation.py in the repo.
+### If want to do Image Segmentation, go to segmentation.py in the repo.
 
 ### Profiling the Model
 1. Load and preprocess the image.
